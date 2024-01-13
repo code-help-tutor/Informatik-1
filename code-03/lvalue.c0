@@ -1,0 +1,18 @@
+// [ ⯈ ] Video #015
+
+#use <conio>
+
+/* Compute an array index (here: 0) and perform a side effect */
+int index() {
+  println("Hi from index()...!");
+  return 0;
+}
+
+int main() {
+  int[] xs = alloc_array(int, 1);
+
+  /* side effect performed twice */
+  xs[index()] += xs[index()] +1;
+
+  return 0;
+}

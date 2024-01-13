@@ -1,0 +1,19 @@
+/* Variablen sind block-lokal */
+
+void f() {
+  int x;
+
+}
+
+void g() {
+  int y;
+
+  { int z;
+
+  }
+
+}
+
+int main() {
+  return 0;
+}

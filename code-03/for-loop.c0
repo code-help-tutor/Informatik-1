@@ -1,0 +1,12 @@
+// [ ⯈ ] Video #015
+
+#use <conio>
+
+int main() {
+  for (int i = 42; i >= 0; i = i - 1) {
+    printint(i);
+    printchar('\n');
+  }
+
+  return 0;
+}

@@ -1,0 +1,18 @@
+#use <conio>
+
+int main() {
+  int x = 10;
+
+  while (x >= 0) {
+    printint(x);
+    /* separate x values by comma */
+    print(", ");
+
+    x = x - 1;
+  }
+
+  /* overwrite trailing comma, new line */
+  println("\b\b.");
+
+  return 0;
+}

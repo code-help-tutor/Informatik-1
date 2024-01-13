@@ -1,0 +1,18 @@
+#use <conio>
+
+void g();
+
+void f() {
+  println("Hi, this is f!");  /* Effekt: Terminal-Output */
+}
+
+void g() {
+  println("Hi, this is g!");  /* Effekt: Terminal-Output */
+}
+
+int main() {
+  f();                    /* Effekt: die Effekte von f() */
+  g();                    /*                     und g() */
+
+  return 0;               // 𝘳𝘦𝘵𝘶𝘳𝘯 𝘤𝘰𝘥𝘦
+}

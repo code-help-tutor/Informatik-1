@@ -1,0 +1,23 @@
+/* Variablendeklaration und Zuweisung */
+
+#use <conio>
+
+int main() {
+  int a = 0;
+  int b = 10;
+  bool eq;
+
+  printint(a + 1);
+  printchar('\n');
+
+  a = a + 1;
+
+  printint(a + 1);
+  printchar('\n');
+
+  eq = a == (a/b)*b + a%b;
+  printbool(eq);
+  printchar('\n');
+
+  return 0;
+}

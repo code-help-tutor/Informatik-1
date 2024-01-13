@@ -1,0 +1,12 @@
+#use <conio>
+/* fügt hier Inhalt von printbits.c0 ein */
+#use "printbits.c0"
+
+int main() {
+  int x = 214;
+
+  printbits(x);
+  printchar('\n');
+
+  return 0;
+}

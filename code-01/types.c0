@@ -1,0 +1,17 @@
+/* Strenge und statische Typüberprüfung in C0 */
+
+#use <conio>
+
+int main() {
+  /* OK */
+  2 == 2;
+
+  /* Typfehler! */
+  // 2 == "2";         /* Vergleich von int und string */
+
+  // 41 + "one";       /* Addition von int und string */
+  // -true;            /* Vorzeichenwechsel eines bool */
+  // println(42);      /* println() gibt string-Werte aus */
+
+  return 0;
+}

@@ -1,0 +1,38 @@
+// [ ⯈ ] Video #014
+
+/* Compilation mit Option -d, um die Dynamic Checks für die
+   Vor- und Nachbedingungen zu aktivieren
+ */
+#use <conio>
+#use "printarray.c0"
+
+/* Berechne die Sequenz der ersten n Fibonacci-Zahlen F₀...Fₙ₋₁ */
+int[] fib(int n)
+/*@ requires n >= 2;                @*/
+/*@ requires n <= 47;               @*/  // Wrap-Around für n > 47
+/*@ ensures  \length(\result) == n; @*/
+{
+  int[] F = alloc_array(int, n);
+
+  F[0] = 0;
+  F[1] = 1;
+
+  for (int i = 2; i < n; i = i + 1) {
+    F[i] = F[i-1] + F[i-2];
+  }
+
+  return F;
+}
+
+
+int main()
+{
+  int[] fibonacci;
+
+  fibonacci = fib(10);
+
+  printintarray(fibonacci, 10);
+  printchar('\n');
+
+  return 0;
+}

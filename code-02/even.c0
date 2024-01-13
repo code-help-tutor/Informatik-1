@@ -1,0 +1,50 @@
+#use <conio>
+
+/* Ist ganze Zahl x gerade? (Bit b0 hat Wertigkeit 1)
+
+       bbbbbbbbbbbbbb
+     & 00000000000001
+     = 0000000000000b
+*/
+bool is_even(int x) {
+  return (x & 1) == 0;    // alternatives Prädikat: (x % 2) == 0
+}
+
+/* Ist Bit an Position n (0..31) in x gesetzt?
+
+       bbbbbbbbbbbbbb
+     & 00000000100000
+     = 00000000b00000
+               ^
+           Position n
+*/
+bool is_bit_set(int x, int n) {
+  return (x & (1 << n)) != 0;
+}
+
+
+int main() {
+  int x = -3;
+  int i = 7;
+
+  // Funktion is_even zum Einsatz bringen
+  while (x <= 3) {
+    printint(x);
+    printchar('\t');
+    printbool(is_even(x));
+    printchar('\n');
+
+    x = x + 1;
+  }
+
+  // Funktion is_bit_set zum Einsatz bringen
+  while (i >= 0) {
+    printbool(is_bit_set(42, i));
+    printchar(' ');
+
+    i = i - 1;
+  }
+  printchar('\n');
+
+  return 0;
+}

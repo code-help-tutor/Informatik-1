@@ -1,0 +1,59 @@
+// [ ⯈ ] Video #018
+
+/* PNG manipulation */
+#use <img>
+
+/* Is pixel blueish (does blue dominate red/green)? */
+bool blueish(int pixel) {
+  int red   = (pixel & 0x00FF0000) >> 16;
+  int green = (pixel & 0x0000FF00) >> 8;
+  int blue  = (pixel & 0x000000FF);
+
+  /* pixel is blueish if its blue component dominates
+     the average of all colors */
+  return blue > ((red + green + blue) / 3);
+}
+
+
+/* Use the bluescreen technique to mix foreground fg
+   and background bg
+*/
+image_t blue_screen(image_t fg, image_t bg)
+/*@ requires image_width(fg)       == image_width(bg);  @*/
+/*@ requires image_height(fg)      == image_height(bg); @*/
+/*@ ensures  image_width(\result)  == image_width(fg);  @*/
+/*@ ensures  image_height(\result) == image_height(fg); @*/
+{
+  /* dimensions of input/outut pictures */
+  int wd = image_width(fg);
+  int ht = image_height(fg);
+
+  /* output: composite picture */
+  image_t comp = image_create(wd, ht);
+
+  int[] fg_pixels   = image_data(fg);
+  int[] bg_pixels   = image_data(bg);
+  int[] comp_pixels = image_data(comp);
+
+  /* copy background pixel to corresponding output pixel
+     if foreground pixel is blueish  */
+  for (int pixel = 0; pixel < wd * ht; pixel++) {
+    comp_pixels[pixel]
+      = blueish(fg_pixels[pixel]) ? bg_pixels[pixel]
+                                  : fg_pixels[pixel];
+  }
+
+  return comp;
+}
+
+
+int main() {
+    image_t fg = image_load("ATAT.png");
+    image_t bg = image_load("icy-road.png");
+    image_t comp;
+
+    comp = blue_screen(fg, bg);
+    image_save(comp, "composite.png");
+
+    return 0;
+}

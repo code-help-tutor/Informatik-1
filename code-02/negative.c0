@@ -1,0 +1,17 @@
+#use <conio>
+#use "printbits.c0"
+
+int main() {
+  int x = -3;
+
+  while (x <= 3) {
+    printint(x);
+    printchar('\t');
+    printbits(x);
+    printchar('\n');
+
+    x = x + 1;
+  }
+
+  return 0;
+}

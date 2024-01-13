@@ -1,0 +1,29 @@
+#use <conio>
+
+/* Ist Bit an Position n (0..31) in x gesetzt?
+
+        bbbbbbbbbb
+      & 0000010000
+      = 00000b0000
+             ^
+         Position n
+ */
+bool is_bit_set(int x, int n) {
+	return (x & (1 << n)) != 0;
+}
+
+/* Ausgabe der 32 Bits von x (höherwertigstes Bit b₃₁ links) */
+void printbits(int x) {
+	int n = 31;
+
+	while (n >= 0) {
+		if (is_bit_set(x, n)) {
+			printchar('1');
+		}
+		else {
+			printchar('0');
+		}
+		n = n - 1;
+	}
+}
+

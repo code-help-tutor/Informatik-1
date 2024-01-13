@@ -1,0 +1,82 @@
+// [ ⯈ ] Video #016
+
+#use <conio>
+#use "printarray.c0"
+
+/*  Sequence of the first n n Fibonacci numbers F₀...Fₙ₋₁ */
+int[] fib(int n)
+/*@ requires n <= 47; @*/
+/*@ requires n >= 2; @*/
+/*@ ensures \length(\result) == n; @*/
+{
+  int[] F = alloc_array(int, n);
+
+  F[0] = 0;
+  F[1] = 1;
+
+  for (int i = 2; i < n; i++) {
+    F[i] = F[i - 1] + F[i - 2];
+  }
+
+  return F;
+}
+
+/* Check pair-wise equality of the n elements of arrays xs, ys */
+bool is_intarray_equal(int[] xs, int[] ys, int n)
+/*@ requires \length(xs) == \length(ys); @*/
+/*@ requires \length(xs) == n;           @*/
+{
+  for (int i = 0; i < n; i++) {
+    if (xs[i] != ys[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+/* Create an element-wise copy of the n elements of array xs */
+int[] intarray_clone(int[] xs, int n)
+/*@ requires \length(xs) == n;                  @*/
+/*@ ensures  \length(\result) == n;             @*/
+/*@ ensures  is_intarray_equal(xs, \result, n); @*/
+{
+  int[] clone = alloc_array(int, n);
+
+  for (int i = 0; i < n; i++) {
+    clone[i] = xs[i];
+  }
+
+  return clone;
+}
+
+
+int main() {
+  int[] fs1 = fib(10);
+  int[] fs2 = fib(10);
+
+  /*  false: Vergleich der Referenzen (small values) */
+  printbool(fs1 == fs2);
+  printchar('\n');
+
+  /* true: paarweiser Vergleich der Elemente */
+  printbool(is_intarray_equal(fs1, fs2, 10));
+  printchar('\n');
+
+  /*  fs1, fs2 referenzieren jetzt das selbe Array im Heap (Aliasing) */
+  fs2 = fs1;
+
+  /* Effekte auf fs2 betreffen auch fs1 */
+  fs2[5] = 9999;
+  printintarray(fs1, 10);
+  printchar('\n');
+
+  /* fs1 ist eine unabhängige Kopie von fs2 */
+  fs1 = intarray_clone(fs2, 10);
+
+  /* Effekte auf fs2 betreffen fs1 nicht (fs1[5] == 9999) */
+  fs2[5] = -9999;
+  printintarray(fs1, 10);
+  printchar('\n');
+
+  return 0;
+}

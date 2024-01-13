@@ -1,0 +1,15 @@
+/* Hmm...? */
+
+int main() {
+  int a = 1989;
+  int b = 867;
+
+  while (b != 0) {
+    int t = b;
+    b = a % b;
+    a = t;
+  }
+
+  /* UNIX return code holds result */
+  return a;
+}

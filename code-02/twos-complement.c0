@@ -1,0 +1,27 @@
+/* Funktionsaufruf einer der einstelligen Funktion mit Typ
+
+     int twos_complement(int)
+*/
+
+#use <conio>
+
+
+/* Berechne das Zweierkomplement der Zahl x */
+int twos_complement(int x) {
+  return ~x + 1;             // (1) Bits negieren, (2) 1 addieren
+}
+
+int main() {
+  int y = 42;
+
+  printint(y);
+  println("\ty");
+
+  printint(twos_complement(y));
+  println("\ttwo's complement of y");
+
+  printint(twos_complement(twos_complement(y)));
+  println("\ttwo's complement of two's complement of y");
+
+  return 0;
+}

@@ -1,0 +1,12 @@
+#use <conio>
+
+int main() {
+  int x = 0;
+
+  while (x >= 0) {
+    x = x + 1;
+  }
+  println("We'll never get here!");  // ¯ \_(ツ)_/¯ ?
+
+  return 0;
+}
